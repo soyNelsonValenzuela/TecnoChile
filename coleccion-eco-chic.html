@@ -26,7 +26,7 @@
           <a href="#" class="icon" aria-label="Cuenta de usuario">
             <img src="./img/user.svg" alt="Usuario" />
           </a>
-          <a href="#" class="icon" aria-label="Carrito de compras">
+          <a href="carrito.html" class="icon" aria-label="Carrito de compras">
             <img src="./img/shopping-cart.svg" alt="Carrito" />
           </a>
         </div>
@@ -35,9 +35,30 @@
     <main>
       <section class="collection-section">
         <h1>Colección Eco-Chic</h1>
-        <p>Contenido en construcción.</p>
+        <div class="product-card">
+          <img src="./img/Coleccion1.jpg" alt="Vestido Eco-Chic" width="200" />
+          <h2>Vestido Eco-Chic</h2>
+          <p>Vestido confeccionado con materiales reciclados, elegante y sostenible.</p>
+          <p><strong>$45</strong></p>
+          <button class="add-to-cart" data-name="Vestido Eco-Chic" data-price="45">
+            Agregar al carrito
+          </button>
+        </div>
       </section>
     </main>
+
+    <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    document.querySelector(".add-to-cart").addEventListener("click", function () {
+      const name = this.getAttribute("data-name");
+      const price = parseFloat(this.getAttribute("data-price"));
+      cart.push({ name, price });
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${name} agregado al carrito`);
+    });
+    </script>
+
     <footer>
       <div class="footer-container">
         <nav class="footer-nav">

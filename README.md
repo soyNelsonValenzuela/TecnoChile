@@ -1,8 +1,11 @@
-# VerdeModa - Sitio Web de Moda Sostenible
+# VerdeModa - Tienda online de Moda Sostenible
 
 ## 🌱 Descripción
 
 VerdeModa es un sitio web dedicado a la moda sostenible y ecológica. Nuestro compromiso es ofrecer prendas de vestir que respeten el medio ambiente sin comprometer el estilo. El sitio presenta una experiencia de usuario moderna y responsiva, enfocada en promover prácticas sostenibles en la industria de la moda.
+
+**🆕 Actualización:** Ahora el sitio cuenta con un **carrito de compras funcional**, que permite agregar productos desde la tienda, visualizar el listado de artículos seleccionados, calcular el total de la compra y vaciar el carrito. Esta funcionalidad mejora la experiencia de usuario y acerca el prototipo a un e-commerce real.
+
 
 ## ✨ Características Principales
 
@@ -11,11 +14,13 @@ VerdeModa es un sitio web dedicado a la moda sostenible y ecológica. Nuestro co
 - **Accesibilidad**: Cumple con estándares de accesibilidad web (WCAG)
 - **Moda Sostenible**: Enfoque en materiales reciclados y prácticas eco-amigables
 - **Colecciones Diversas**: Múltiples líneas de productos sostenibles
+- **Carrito de Compras Funcional**: Agregar, visualizar, calcular total y vaciar productos
+
 
 ## 🏗️ Estructura del Proyecto
 
 ```
-pulgastein/
+tienda-online/
 ├── index.html                           # Página principal
 ├── tienda.html                          # Página de tienda
 ├── sobre-nosotros.html                  # Información sobre la empresa
