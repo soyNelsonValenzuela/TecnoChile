@@ -1,0 +1,404 @@
+a {
+  text-decoration: none;
+}
+
+/* Estilos generales para imágenes responsivas */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+header {
+  display: flex;
+  padding: 0.75rem 2.5rem;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  border-bottom: 1px solid #E5E8EB;
+}
+
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-text {
+
+  color: #121712;
+  font-feature-settings: 'dlig' on;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.4375rem;
+  /* 127.778% */
+}
+
+nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 2rem;
+  flex: 1 0 0;
+}
+
+.pages-container {
+  display: flex;
+  height: 2.5rem;
+  align-items: center;
+  gap: 2.25rem;
+}
+
+.pages-container a {
+
+  color: #121712;
+  font-feature-settings: 'dlig' on;
+  font-family: "Plus Jakarta Sans";
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.3125rem;
+  /* 150% */
+}
+
+.icons-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.icon {
+  display: flex;
+  height: 2.5rem;
+  max-width: 30rem;
+  padding: 0rem 0.625rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  background: #F0F5F0;
+}
+
+
+main {
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+  main {
+    padding: 20px 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  main {
+    padding: 20px 80px;
+  }
+}
+
+@media (min-width: 1200px) {
+  main {
+    padding: 20px 160px;
+  }
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  padding: 6px;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .hero {
+    height: 500px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero {
+    height: 600px;
+  }
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: relative;
+  z-index: 0;
+  filter: brightness(0.7);
+  border-radius: 8px;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  z-index: 2;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.btn {
+  background-color: #00c42b;
+  color: white;
+  padding: 16px 32px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn:hover {
+  background-color: #00a824;
+  transform: translateY(-2px);
+}
+
+.section {
+  padding: 40px;
+}
+
+.collections-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.collection-item {
+  flex: 1;
+  min-width: 280px;
+  max-width: 600px;
+  text-align: center;
+}
+
+.collection-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+@media (min-width: 768px) {
+  .collection-item img {
+    height: 350px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .collection-item img {
+    height: 400px;
+  }
+}
+
+.commitment-section {
+  background: #f8f8f8;
+}
+
+.practices-grid {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.practice-box {
+  flex: 1;
+  min-width: 250px;
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* footer {
+  display: flex;
+  max-width: 60rem;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1 0 0;
+} */
+footer {
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  footer {
+    padding: 0 40px;
+  }
+}
+
+@media (min-width: 1024px) {
+  footer {
+    padding: 0 80px;
+  }
+}
+
+@media (min-width: 1200px) {
+  footer {
+    padding: 0 160px;
+  }
+}
+
+.footer-container {
+  display: flex;
+  padding: 2.5rem 1.25rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  flex: 1 0 0;
+  align-self: stretch;
+}
+
+.footer-container nav {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-self: stretch;
+}
+
+
+.footer-container nav a {
+  color: #638763;
+
+
+  font-family: "Plus Jakarta Sans";
+  font-size: 1rem;
+
+
+  /* 150% */
+}
+
+.social-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 1rem;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+
+.rights-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+}
+
+.rights-container small {
+  align-self: stretch;
+  color: #638763;
+  text-align: center;
+  font-feature-settings: 'dlig' on;
+  font-family: "Plus Jakarta Sans";
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5rem;
+  /* 150% */
+}
+
+/* Estilos responsivos para el header */
+@media (max-width: 768px) {
+  header {
+    padding: 0.75rem 1rem;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .header-nav {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .pages-container {
+    gap: 1rem;
+  }
+  
+  .pages-container a {
+    font-size: 0.8rem;
+  }
+  
+  .icons-container {
+    gap: 0.25rem;
+  }
+  
+  .icon {
+    padding: 0.5rem;
+  }
+}
+
+/* Estilos responsivos para el grid de colecciones */
+@media (max-width: 768px) {
+  .collections-grid {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .collection-item {
+    max-width: 100%;
+  }
+}
+
+/* Estilos responsivos para las prácticas */
+@media (max-width: 768px) {
+  .practices-grid {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .practice-box {
+    min-width: 100%;
+  }
+}
+
+/* Estilos responsivos para el hero text */
+@media (max-width: 768px) {
+  .hero-text {
+    padding: 1rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+  
+  .hero-text p {
+    font-size: 0.9rem;
+  }
+  
+  .btn {
+    padding: 12px 24px;
+    font-size: 0.8rem;
+  }
+}
