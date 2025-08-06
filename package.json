@@ -1,0 +1,17 @@
+{
+  "name": "tienda-online",
+  "version": "1.0.0",
+  "description": "Tienda Online para la evaluación final del modulo 4 de Fundamentos en Programación con JavaScript de la Capacitación Desarrolo de aplicaciones front-end de Talento digital.",
+  "homepage": "https://bootcampunab2025.github.io/tienda-online/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bootcampunab2025/tienda-online.git"
+  },
+  "main": "tienda.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "MasterdjinnCL, barahona-gallardo, NoemiFagerstromLinck, soyNelsonValenzuela",
+  "license": "ISC"
+}
