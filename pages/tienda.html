@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8" />
     <title>Tienda - Tecno Chile</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="../css/style.css" />
 </head>
+
 <body>
     <header style="height: 80px; min-height: 80px; display: flex; align-items: center;">
         <div class="header-brand">
-            <img src="./img/Logo.svg" alt="Tecno Chile Logo" />
-            <strong><a class="logo-text" href="index.html">Tecno Chile</a></strong>
+            <img src="../assets/img/Logo.svg" alt="Tecno Chile Logo" />
+            <strong><a class="logo-text" href="../index.html">Tecno Chile</a></strong>
         </div>
         <nav class="header-nav">
             <div class="pages-container">
-                <a href="tienda.html" aria-current="page">Shop</a>
-                <a href="sobre-nosotros.html">Sobre nosotros</a>
-                <a href="blog.html">Blog</a>
-                <a href="contacto.html">Contacto</a>
+                <a href="./tienda.html" aria-current="page">Shop</a>
+                <a href="../pages/sobre-nosotros.html">Sobre nosotros</a>
+                <a href="../pages/blog.html">Blog</a>
+                <a href="../pages/contacto.html">Contacto</a>
             </div>
             <div class="icons-container">
                 <a href="#" class="icon" aria-label="Buscar">
-                    <img src="./img/search.svg" alt="Buscar" />
+                    <img src="../assets/img/search.svg" alt="Buscar" />
                 </a>
                 <a href="#" class="icon" aria-label="Cuenta de usuario">
-                    <img src="./img/user.svg" alt="Usuario" />
+                    <img src="../assets/img/user.svg" alt="Usuario" />
                 </a>
                 <a href="carrito.html" class="icon" aria-label="Carrito de compras">
-                    <img src="./img/shopping-cart.svg" alt="Carrito" />
+                    <img src="../assets/img/shopping-cart.svg" alt="Carrito" />
                 </a>
             </div>
         </nav>
@@ -40,20 +42,22 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="mb-0">Datos del Cliente</h5>
+                            <h5 class="mb-0 text-white">Datos del Cliente</h5>
                         </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="customerName" class="form-label">Nombre</label>
-                                        <input type="text" class="form-control" id="customerName" placeholder="Ingrese su nombre">
+                                        <label for="customerName" class="form-label text-white">Nombre</label>
+                                        <input type="text" class="form-control" id="customerName"
+                                            placeholder="Ingrese su nombre">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="customerLastname" class="form-label">Apellido</label>
-                                        <input type="text" class="form-control" id="customerLastname" placeholder="Ingrese su apellido">
+                                        <label for="customerLastname" class="form-label text-white">Apellido</label>
+                                        <input type="text" class="form-control" id="customerLastname"
+                                            placeholder="Ingrese su apellido">
                                     </div>
                                 </div>
                             </div>
@@ -72,31 +76,37 @@
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="img/reloj.svg" class="d-block w-100" alt="Promoción 1" style="height: 300px; object-fit: cover;">
+                        <img src="../assets/img/productos/reloj.webp" class="d-block w-100 carousel-img" alt="..." />
+                        <div class="carousel-overlay"></div> <!-- capa oscura -->
                         <div class="carousel-caption d-none d-md-block">
                             <h5>¡Relojes Inteligentes!</h5>
                             <p>Descubre los relojes más avanzados con tecnología de punta.</p>
                         </div>
                     </div>
+
                     <div class="carousel-item">
-                        <img src="img/audifonos.svg" class="d-block w-100" alt="Promoción 2" style="height: 300px; object-fit: cover;">
+                        <img src="../assets/img/productos/audifono-1.jpeg" class="carousel-img d-block w-100" alt="Promoción 2">
+                        <div class="carousel-overlay"></div> <!-- 🔹 Capa negra -->
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Audífonos Premium</h5>
                             <p>Experiencia de audio inmersiva con la mejor calidad de sonido.</p>
                         </div>
                     </div>
                     <div class="carousel-item">
-                        <img src="img/silla.svg" class="d-block w-100" alt="Promoción 3" style="height: 300px; object-fit: cover;">
+                        <img src="../assets/img/productos/silla-gamer.jpeg" class="carousel-img d-block w-100" alt="Promoción 3">
+                           <div class="carousel-overlay"></div> <!-- 🔹 Capa negra -->
                         <div class="carousel-caption d-none d-md-block">
                             <h5>Sillas Ergonómicas</h5>
                             <p>Comodidad y ergonomía para tu espacio de trabajo ideal.</p>
                         </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#promoCarousel"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon"></span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#promoCarousel"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon"></span>
                 </button>
             </div>
@@ -105,7 +115,8 @@
                 <div class="col-12">
                     <div class="input-group">
                         <span class="input-group-text"><i class="bi bi-search"></i>🔍</span>
-                        <input type="text" class="form-control" id="productFilter" placeholder="Buscar productos..." onkeyup="filterProducts()">
+                        <input type="text" class="form-control" id="productFilter" placeholder="Buscar productos..."
+                            onkeyup="filterProducts()">
                     </div>
                 </div>
             </div>
@@ -129,13 +140,13 @@
             </nav>
             <div class="social-container">
                 <a href="#" aria-label="Instagram">
-                    <img src="./img/instagram.svg" alt="Instagram" />
+                    <img src="../assets/img/instagram.svg" alt="Instagram" />
                 </a>
                 <a href="#" aria-label="Facebook">
-                    <img src="./img/facebook.svg" alt="Facebook" />
+                    <img src="../assets/img/facebook.svg" alt="Facebook" />
                 </a>
                 <a href="#" aria-label="Twitter">
-                    <img src="./img/twitter.svg" alt="Twitter" />
+                    <img src="../assets/img/twitter.svg" alt="Twitter" />
                 </a>
             </div>
             <div class="rights-container">
@@ -145,6 +156,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="tienda.js"></script>
+    <script src="../js/tienda.js"></script>
 </body>
+
 </html>

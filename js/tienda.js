@@ -1,95 +1,190 @@
-const productos = [
-  { id: 1, nombre: "Reloj", precio: 300, imagen: "../img/productos/reloj.webp" },
-  { id: 2, nombre: "Audífonos", precio: 200, imagen: "../img/productos/audifono-1.jpeg" },
-  { id: 3, nombre: "Audífonos", precio: 100, imagen: "../img/productos/audifono-2.jpeg" },
-  { id: 4, nombre: "Silla", precio: 400, imagen: "../img/productos/silla-gamer.jpeg" }
+const products = [
+  { id: 1, name: "Reloj", price: 300, image: "../assets/img/productos/reloj.webp" },
+  { id: 2, name: "Audifonos", price: 200, image: "../assets/img/productos/audifono-1.jpeg" },
+  { id: 3, name: "Audifonos", price: 100, image: "../assets/img/productos/audifono-2.jpeg" },
+  { id: 4, name: "Silla", price: 400, image: "../assets/img/productos/silla-gamer.jpeg" }
 ];
 
-let carrito = JSON.parse(localStorage.getItem("cart")) || [];
+let allProducts = [...products];
+let customerData = JSON.parse(localStorage.getItem('customerData')) || null;
 
-function renderProductos(container, filtro = "") {
-  container.innerHTML = "";
+function displayCustomerInfo() {
+  const customerInfoDiv = document.getElementById('customerInfo');
+  if (customerData) {
+    customerInfoDiv.innerHTML = `
+            <div class="alert alert-success">
+                <strong>Cliente:</strong> ${customerData.name} ${customerData.lastname}
+            </div>
+        `;
+    document.getElementById('customerName').value = customerData.name;
+    document.getElementById('customerLastname').value = customerData.lastname;
+  }
+}
 
-  const filtrados = productos.filter(p =>
-    p.nombre.toLowerCase().includes(filtro.toLowerCase())
-  );
+function saveCustomerInfo() {
+  const name = document.getElementById('customerName').value.trim();
+  const lastname = document.getElementById('customerLastname').value.trim();
 
-  filtrados.forEach(p => {
-    const card = document.createElement("div");
-    card.className = "col-md-3 mb-4";
-    card.innerHTML = `
-  <div class="card h-100">
-    <img src="${p.imagen}" class="card-img-top" alt="${p.nombre}">
-    <div class="card-body d-flex flex-column justify-content-between">
-      <h5 class="card-title">${p.nombre}</h5>
-      <p class="card-text">Precio: $${p.precio}</p>
-      <button class="btn btn-success btn-sm mb-1" data-id="${p.id}" data-action="agregar">Agregar al carrito</button>
-      <button class="btn btn-danger btn-sm" data-id="${p.id}" data-action="eliminar">Eliminar</button>
+  if (name && lastname) {
+    customerData = { name, lastname };
+    localStorage.setItem('customerData', JSON.stringify(customerData));
+    displayCustomerInfo();
+
+    showToast('Información guardada correctamente', 'success');
+  } else {
+    showToast('Por favor complete todos los campos', 'warning');
+  }
+}
+
+function showToast(message, type = 'info') {
+  const toastContainer = document.createElement('div');
+  toastContainer.className = 'position-fixed top-0 end-0 p-3';
+  toastContainer.style.zIndex = '1050';
+
+  const toastId = 'toast-' + Date.now();
+  toastContainer.innerHTML = `
+        <div id="${toastId}" class="toast" role="alert">
+            <div class="toast-header">
+                <strong class="me-auto text-${type}">Notificación</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
+            </div>
+            <div class="toast-body">
+                ${message}
+            </div>
+        </div>
+    `;
+
+  document.body.appendChild(toastContainer);
+  const toast = new bootstrap.Toast(document.getElementById(toastId));
+  toast.show();
+
+  setTimeout(() => {
+    document.body.removeChild(toastContainer);
+  }, 5000);
+}
+
+function renderProducts(productsToRender = allProducts) {
+  const container = document.getElementById('productsContainer');
+  container.innerHTML = '';
+
+  productsToRender.forEach(product => {
+    const productCard = document.createElement('div');
+    productCard.className = 'col-md-6 col-lg-4 mb-4';
+
+    productCard.innerHTML = `
+  <div class="card h-100 shadow-sm bg-dark text-white">
+    <img src="${product.image}" class="card-img-top product-img" alt="${product.name}">
+    <div class="card-body d-flex flex-column">
+      <h5 class="card-title">${product.name}</h5>
+      <p class="card-text"><strong>Precio: $${product.price}</strong></p>
+      <div class="mt-auto">
+        <button class="btn btn-success w-100 mb-2"
+                onclick="addToCart(${product.id})"
+                data-bs-toggle="tooltip" 
+                data-bs-placement="top" 
+                title="Agregar ${product.name} al carrito">
+           Agregar al Carrito
+        </button>
+        <button class="btn btn-danger w-100"
+                onclick="removeFromCart(${product.id})"
+                data-bs-toggle="tooltip" 
+                data-bs-placement="top" 
+                title="Eliminar ${product.name} del carrito">
+          Eliminar del Carrito
+        </button>
+      </div>
     </div>
   </div>
 `;
-    container.appendChild(card);
+
+    container.appendChild(productCard);
   });
 
-  // Delegar eventos
-  container.querySelectorAll("button").forEach(btn => {
-    const id = parseInt(btn.dataset.id);
-    const action = btn.dataset.action;
-
-    btn.addEventListener("click", () => {
-      if (action === "agregar") agregarAlCarrito(id);
-      else if (action === "eliminar") eliminarDelCarrito(id);
-    });
+  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
   });
 }
 
-function agregarAlCarrito(id) {
-  const producto = productos.find(p => p.id === id);
-  if (producto) {
-    carrito.push({ name: producto.nombre, price: producto.precio });
-    localStorage.setItem("cart", JSON.stringify(carrito));
-    mostrarAlertaBootstrap(`"${producto.nombre}" fue agregado al carrito`, "success");
+function filterProducts() {
+  const filterValue = document.getElementById('productFilter').value.toLowerCase();
+
+  if (filterValue === '') {
+    allProducts = [...products];
+  } else {
+    allProducts = products.filter(product =>
+      product.name.toLowerCase().includes(filterValue) ||
+      product.id.toString().includes(filterValue) ||
+      product.price.toString().includes(filterValue)
+    );
   }
+
+  renderProducts();
 }
 
-function eliminarDelCarrito(id) {
-  const producto = productos.find(p => p.id === id);
-  const index = carrito.findIndex(item => item.name === producto.nombre && item.price === producto.precio);
+function addToCart(productId) {
+  const product = products.find(p => p.id === productId);
+  if (!product) return;
+
+  if (!customerData) {
+    showToast('Por favor ingrese sus datos antes de agregar productos al carrito', 'warning');
+    document.getElementById('customerName').focus();
+    return;
+  }
+
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  cart.push({
+    id: product.id,
+    name: product.name,
+    price: product.price
+  });
+
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  showToast(`${product.name} agregado al carrito`, 'success');
+  updateCartCounter();
+}
+
+function removeFromCart(productId) {
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const index = cart.findIndex(item => item.id === productId);
   if (index !== -1) {
-    carrito.splice(index, 1);
-    localStorage.setItem("cart", JSON.stringify(carrito));
-    mostrarAlertaBootstrap(`"${producto.nombre}" fue eliminado del carrito`, "info");
+    const removed = cart.splice(index, 1)[0];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    showToast(`${removed.name} eliminado del carrito`, 'info');
+    updateCartCounter();
+  } else {
+    showToast('Este producto no está en el carrito', 'warning');
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("productosContainer");
-  const filtroInput = document.getElementById("filtroInput");
+function updateCartCounter() {
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+  const cartIcon = document.querySelector('a[href="carrito.html"]');
 
-  renderProductos(container);
+  const existingCounter = cartIcon.querySelector('.cart-counter');
+  if (existingCounter) {
+    existingCounter.remove();
+  }
 
-  filtroInput.addEventListener("input", (e) => {
-    renderProductos(container, e.target.value);
+  if (cart.length > 0) {
+    const counter = document.createElement('span');
+    counter.className = 'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-counter';
+    counter.style.fontSize = '0.7rem';
+    counter.textContent = cart.length;
+    cartIcon.style.position = 'relative';
+    cartIcon.appendChild(counter);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  displayCustomerInfo();
+  renderProducts();
+  updateCartCounter();
+
+  const carousel = new bootstrap.Carousel(document.querySelector('#promoCarousel'), {
+    interval: 4000,
+    wrap: true
   });
 });
-
-function mostrarAlertaBootstrap(mensaje, tipo = "success") {
-  const container = document.getElementById("alert-container");
-  const alerta = document.createElement("div");
-
-  alerta.className = `alert alert-${tipo} alert-dismissible fade show mt-2`;
-  alerta.setAttribute("role", "alert");
-  alerta.innerHTML = `
-    ${mensaje}
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-  `;
-
-  container.appendChild(alerta);
-
-  // Quitar automáticamente después de 3 segundos
-  setTimeout(() => {
-    alerta.classList.remove("show");
-    alerta.classList.add("hide");
-    setTimeout(() => alerta.remove(), 300);
-  }, 3000);
-}
