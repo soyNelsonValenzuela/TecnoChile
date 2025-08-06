@@ -1,10 +1,26 @@
-# VerdeModa - Tienda online de Moda Sostenible
+# Tecno Chile - Tienda Online Completa
 
-## 🌱 Descripción
+## 🛒 Descripción
 
-VerdeModa es un sitio web dedicado a la moda sostenible y ecológica. Nuestro compromiso es ofrecer prendas de vestir que respeten el medio ambiente sin comprometer el estilo. El sitio presenta una experiencia de usuario moderna y responsiva, enfocada en promover prácticas sostenibles en la industria de la moda.
+Tecno Chile es una tienda online completamente funcional desarrollada como proyecto de **Fundamentos de Programación en JavaScript**. El sitio web implementa un sistema completo de e-commerce con carrito de compras, gestión de productos, filtrado, y todas las funcionalidades requeridas para una experiencia de compra moderna.
 
-**🆕 Actualización:** Ahora el sitio cuenta con un **carrito de compras funcional**, que permite agregar productos desde la tienda, visualizar el listado de artículos seleccionados, calcular el total de la compra y vaciar el carrito. Esta funcionalidad mejora la experiencia de usuario y acerca el prototipo a un e-commerce real.
+**🆕 Funcionalidades Implementadas:**
+- ✅ **Carrito de compras completo** con agregar, eliminar y vaciar
+- ✅ **Bootstrap 5.3.0** con carousel, tooltips, modals y más
+- ✅ **Gestión de datos del cliente** con localStorage
+- ✅ **Filtrado de productos** en tiempo real
+- ✅ **Cálculo automático de totales**
+- ✅ **Proceso de checkout funcional**
+- ✅ **Diseño completamente responsivo**
+
+## 🛍️ Productos Disponibles
+
+| ID | PRODUCTO   | PRECIO |
+|----|------------|--------|
+| 1  | Reloj      | $300   |
+| 2  | Audifonos  | $200   |
+| 3  | Audifonos  | $100   |
+| 4  | Silla      | $400   |
 
 
 ## ✨ Características Principales
