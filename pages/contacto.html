@@ -8,30 +8,30 @@
     <link rel="stylesheet" href="../css/style.css" />
   </head>
   <body>
-    <header style="height: 80px; min-height: 80px; display: flex; align-items: center;">
-      <div class="header-brand">
-        <img src="../assets/img/Logo.svg" alt="Tecno Chile Logo" />
-        <strong><a class="logo-text" href="../index.html">Tecno Chile</a></strong>
-      </div>
-      <nav class="header-nav">
-        <div class="pages-container">
-          <a href="./tienda.html">Shop</a>
-          <a href="./sobre-nosotros.html" aria-current="page">Sobre nosotros</a>
-          <a href="./blog.html">Blog</a>
-          <a href="./contacto.html">Contacto</a>
+    <header class="main-navbar" style="height: 80px; min-height: 80px; background: #111217; position: sticky; top: 0; z-index: 1000;">
+        <div class="container-fluid d-flex align-items-center justify-content-between" style="height:80px;">
+            <div class="logo d-flex align-items-center gap-2">
+                <a href="../index.html"><span class="logo-text">Tecno <span class="logo-highlight">Chile</span></span></a>            </div>
+            <nav class="header-nav d-flex align-items-center flex-grow-1 ms-4">
+                <div class="pages-container d-flex align-items-center gap-4">
+                    <a href="tienda.html">Shop</a>
+                    <a href="sobre-nosotros.html">Sobre nosotros</a>
+                    <a href="blog.html">Blog</a>
+                    <a href="contacto.html">Contacto</a>
+                </div>
+                <div class="icons-container d-flex align-items-center ms-auto gap-2">
+                    <a href="#" class="icon-btn" aria-label="Buscar">
+                        <img src="../assets/img/search.svg" alt="Buscar" />
+                    </a>
+                    <a href="#" class="icon-btn" aria-label="Cuenta de usuario">
+                        <img src="../assets/img/user.svg" alt="Usuario" />
+                    </a>
+                    <a href="carrito.html" class="icon-btn" aria-label="Carrito de compras">
+                        <img src="../assets/img/shopping-cart.svg" alt="Carrito" />
+                    </a>
+                </div>
+            </nav>
         </div>
-        <div class="icons-container">
-          <a href="#" class="icon" aria-label="Buscar">
-            <img src="../assets/img/search.svg" alt="Buscar" />
-          </a>
-          <a href="#" class="icon" aria-label="Cuenta de usuario">
-            <img src="../assets/img/user.svg" alt="Usuario" />
-          </a>
-          <a href="carrito.html" class="icon" aria-label="Carrito de compras">
-            <img src="../assets/img/shopping-cart.svg" alt="Carrito" />
-          </a>
-        </div>
-      </nav>
     </header>
     <main>
       <section class="contact-section">

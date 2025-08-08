@@ -8,76 +8,86 @@
     <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
-    <header style="height: 80px; min-height: 80px; display: flex; align-items: center;">
-        <div class="header-brand">
-            <img src="./assets/img/Logo.svg" alt="Tecno Chile Logo" />
-            <strong><a class="logo-text" href="index.html" aria-current="page">Tecno Chile</a></strong>
+    <header class="main-navbar" style="height: 80px; min-height: 80px; background: #111217; position: sticky; top: 0; z-index: 1000;">
+        <div class="container-fluid d-flex align-items-center justify-content-between" style="height:80px;">
+            <div class="logo d-flex align-items-center gap-2">
+                <a href="index.html"><span class="logo-text">Tecno <span class="logo-highlight">Chile</span></span></a>
+            </div>
+            <nav class="header-nav d-flex align-items-center flex-grow-1 ms-4">
+                <div class="pages-container d-flex align-items-center gap-4">
+                    <a href="./pages/tienda.html">Shop</a>
+                    <a href="./pages/sobre-nosotros.html">Sobre nosotros</a>
+                    <a href="./pages/blog.html">Blog</a>
+                    <a href="./pages/contacto.html">Contacto</a>
+                </div>
+                <div class="icons-container d-flex align-items-center ms-auto gap-2">
+                    <a href="#" class="icon-btn" aria-label="Buscar">
+                        <img src="./assets/img/search.svg" alt="Buscar" />
+                    </a>
+                    <a href="#" class="icon-btn" aria-label="Cuenta de usuario">
+                        <img src="./assets/img/user.svg" alt="Usuario" />
+                    </a>
+                    <a href="./pages/carrito.html" class="icon-btn" aria-label="Carrito de compras">
+                        <img src="./assets/img/shopping-cart.svg" alt="Carrito" />
+                    </a>
+                </div>
+            </nav>
         </div>
-        <nav class="header-nav">
-            <div class="pages-container">
-                <a href="./pages/tienda.html">Shop</a>
-                <a href="./pages/sobre-nosotros.html">Sobre nosotros</a>
-                <a href="./pages/blog.html">Blog</a>
-                <a href="./pages/contacto.html">Contacto</a>
-            </div>
-            <div class="icons-container">
-                <a href="#" class="icon" aria-label="Buscar">
-                    <img src="./assets/img/search.svg" alt="Buscar" />
-                </a>
-                <a href="#" class="icon" aria-label="Cuenta de usuario">
-                    <img src="./assets/img/user.svg" alt="Usuario" />
-                </a>
-                <a href="./pages/carrito.html" class="icon" aria-label="Carrito de compras">
-                    <img src="./assets/img/shopping-cart.svg" alt="Carrito" />
-                </a>
-            </div>
-        </nav>
     </header>
     <main>
-        <section class="hero">
-            <img src="./assets/img/hero-tech.svg" alt="Tecnología de vanguardia" />
-            <div class="hero-text">
-                <h1>¡Tecnología de vanguardia!</h1>
-                <p>
-                    Descubre nuestra colección de productos tecnológicos de última generación
-                    con la mejor calidad y precios del mercado.
-                </p>
-                <a href="./pages/tienda.html" class="button">¡COMPRA AHORA!</a>
+        <!-- Banner hero con fondo negro-azul -->
+        <section class="shop-banner-hero my-5 py-5">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-center flex-nowrap">
+                    <div class="col-md-5 text-center text-md-start">
+                        <h1 class="shop-category-title mb-3">Tecnología Destacada</h1>
+                        <p class="shop-category-desc mb-0">Descubre nuestra colección de productos tecnológicos de última generación con la mejor calidad y precios del mercado.</p>
+                        <a href="./pages/tienda.html" class="button mt-4">¡COMPRA AHORA!</a>
+                    </div>
+                    <div class="col-md-7 d-flex justify-content-center">
+                        <img src="https://assets-v3.pcfactory.cl/uploads/38c3ce0f-f2bb-4237-b1ca-19396e7a3c44/original/Modyo-WEB-Banner-Principal-1792x490.webp" alt="Tecnología de vanguardia" class="img-fluid banner-img" style="max-height: 320px;">
+                    </div>
+                </div>
             </div>
         </section>
-        <section class="collections-section">
-            <h2>Nuestros Productos</h2>
-            <div class="collections-grid">
-                <article class="collection-item">
-                    <a href="coleccion-eco-chic.html">
-                        <img src="./assets/img/productos/reloj.webp" alt="Relojes Inteligentes" />
-                    </a>
-                    <h3>Relojes Inteligentes</h3>
-                    <p>
-                        Relojes de última tecnología con funciones avanzadas para 
-                        mantenerte conectado en todo momento.
-                    </p>
-                </article>
-                <article class="collection-item">
-                    <a href="./pages/coleccion-estilo-sostenible.html">
-                        <img src="./assets/img/productos/audifono-2.jpeg" alt="Audífonos Premium" />
-                    </a>
-                    <h3>Audífonos Premium</h3>
-                    <p>
-                        Audífonos de alta calidad con sonido cristalino y 
-                        tecnología de cancelación de ruido.
-                    </p>
-                </article>
-                <article class="collection-item">
-                    <a href="./pages/coleccion-accesorios.html">
-                        <img src="./assets/img/productos/silla-gamer.jpeg" alt="Sillas Ergonómicas" />
-                    </a>
-                    <h3>Sillas Ergonómicas</h3>
-                    <p>
-                        Sillas diseñadas para el máximo confort durante largas 
-                        jornadas de trabajo o gaming.
-                    </p>
-                </article>
+        <section class="collections-section py-5">
+            <h2 class="text-center mb-4">Nuestros Productos</h2>
+            <div class="container">
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card modern-card h-100 text-center">
+                            <a href="coleccion-eco-chic.html">
+                                <img src="./assets/img/productos/reloj.webp" alt="Relojes Inteligentes" class="card-img-top" />
+                            </a>
+                            <div class="card-body">
+                                <h3 class="card-title">Relojes Inteligentes <span class="badge bg-success">Nuevo</span></h3>
+                                <p class="card-text">Relojes de última tecnología con funciones avanzadas para mantenerte conectado en todo momento.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card modern-card h-100 text-center">
+                            <a href="./pages/coleccion-estilo-sostenible.html">
+                                <img src="./assets/img/productos/audifono-2.jpeg" alt="Audífonos Premium" class="card-img-top" />
+                            </a>
+                            <div class="card-body">
+                                <h3 class="card-title">Audífonos Premium</h3>
+                                <p class="card-text">Audífonos de alta calidad con sonido cristalino y tecnología de cancelación de ruido.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card modern-card h-100 text-center">
+                            <a href="./pages/coleccion-accesorios.html">
+                                <img src="./assets/img/productos/silla-gamer.jpeg" alt="Sillas Ergonómicas" class="card-img-top" />
+                            </a>
+                            <div class="card-body">
+                                <h3 class="card-title">Sillas Ergonómicas</h3>
+                                <p class="card-text">Sillas diseñadas para el máximo confort durante largas jornadas de trabajo o gaming.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
         <section class="commitment-section" id="technology">
