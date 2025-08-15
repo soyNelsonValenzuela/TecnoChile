@@ -248,6 +248,51 @@ header {
   border: 1px solid #00cfff;
   border-radius: 8px;
 }
+
+/* Color del placeholder para inputs en formularios */
+.form-control::placeholder {
+  color: #e0e7ef;
+  opacity: 1;
+}
+
+/* Responsividad para el formulario del header */
+.customer-form-header {
+  margin-top: 0.5rem;
+}
+@media (max-width: 768px) {
+  .customer-form-header .row {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .customer-form-header .col-md-3,
+  .customer-form-header .col-md-2 {
+    width: 100%;
+    max-width: 100%;
+  }
+  .customer-form-header .btn {
+    margin-top: 0.5rem;
+  }
+}
+/* En pantallas medianas y grandes, hacer los campos compactos para no tapar contenido */
+@media (min-width: 769px) {
+  .customer-form-header .row {
+    flex-wrap: nowrap;
+  }
+  .customer-form-header .col-12.col-md-3,
+  .customer-form-header .col-12.col-md-2 {
+    flex: 0 0 auto;
+    width: auto;
+  }
+  .customer-form-header .form-control-sm {
+    width: 200px;
+    max-width: 220px;
+  }
+  .customer-form-header .btn-sm {
+    width: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
 .form-control:focus {
   background: #23272f;
   color: #fff;

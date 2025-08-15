@@ -11,13 +11,13 @@ let customerData = JSON.parse(localStorage.getItem('customerData')) || null;
 function displayCustomerInfo() {
   const customerInfoDiv = document.getElementById('customerInfo');
   if (customerData) {
-    customerInfoDiv.innerHTML = `
-            <div class="alert alert-success">
-                <strong>Cliente:</strong> ${customerData.name} ${customerData.lastname}
-            </div>
-        `;
-    document.getElementById('customerName').value = customerData.name;
-    document.getElementById('customerLastname').value = customerData.lastname;
+  customerInfoDiv.innerHTML = `
+      <span class="badge bg-success">Cliente: <strong>${customerData.name} ${customerData.lastname}</strong></span>
+    `;
+  const nameInput = document.getElementById('customerName');
+  const lastInput = document.getElementById('customerLastname');
+  if (nameInput) nameInput.value = customerData.name;
+  if (lastInput) lastInput.value = customerData.lastname;
   }
 }
 
