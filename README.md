@@ -18,7 +18,6 @@ El objetivo fue construir una tienda online con carrito de compras dinámico, ut
     - `Quedan X` → cuando quedan menos de 4 unidades.
 - **Checkout**:
   - Rebaja automáticamente el stock tras la compra.
-  - Si algún producto llega a stock 0, se alerta mediante un **correo automático (mailto)** al responsable.
 - **UI con Bootstrap 5** y estilos personalizados (`css/style.css`):
   - Cards con hover, gradientes y sombras.
   - Navbar sticky y footer pegado al fondo.
