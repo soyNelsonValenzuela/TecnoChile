@@ -1,38 +1,114 @@
-const products = [
-  { id: 1, name: "Reloj", price: 300, image: "../assets/img/productos/reloj.webp" },
-  { id: 2, name: "Audifonos", price: 200, image: "../assets/img/productos/audifono-1.jpeg" },
-  { id: 3, name: "Audifonos", price: 100, image: "../assets/img/productos/audifono-2.jpeg" },
-  { id: 4, name: "Silla", price: 400, image: "../assets/img/productos/silla-gamer.jpeg" }
-];
-
-let allProducts = [...products];
-let customerData = JSON.parse(localStorage.getItem('customerData')) || null;
-
-function displayCustomerInfo() {
-  const customerInfoDiv = document.getElementById('customerInfo');
-  if (customerData) {
-  customerInfoDiv.innerHTML = `
-      <span class="badge bg-success">Cliente: <strong>${customerData.name} ${customerData.lastname}</strong></span>
-    `;
-  const nameInput = document.getElementById('customerName');
-  const lastInput = document.getElementById('customerLastname');
-  if (nameInput) nameInput.value = customerData.name;
-  if (lastInput) lastInput.value = customerData.lastname;
+// /js/tienda.js — versión OOP con stock y JSON
+class Product {
+  constructor({ id, name, price, image, stock }) {
+    this.id = id;
+    this.name = name;
+    this.price = price;
+    this.image = image;
+    this.stock = stock;
+  }
+  get stockLabel() {
+    if (this.stock <= 0) return "Agotado";
+    if (this.stock === 1) return "¡Último!";
+    if (this.stock < 4) return `Quedan ${this.stock}`;
+    return "";
   }
 }
 
-function saveCustomerInfo() {
-  const name = document.getElementById('customerName').value.trim();
-  const lastname = document.getElementById('customerLastname').value.trim();
+class Inventory {
+  static STORAGE_KEY = "inventory";
+  static async load() {
+    // Si ya está en localStorage, usarlo; si no, leer JSON y persistirlo
+    const cached = localStorage.getItem(Inventory.STORAGE_KEY);
+    if (cached) {
+      const arr = JSON.parse(cached);
+      return arr.map(p => new Product(p));
+    }
+    const res = await fetch("../assets/data/products.json");
+    const data = await res.json();
+    localStorage.setItem(Inventory.STORAGE_KEY, JSON.stringify(data));
+    return data.map(p => new Product(p));
+  }
+  static save(products) {
+    localStorage.setItem(Inventory.STORAGE_KEY, JSON.stringify(products));
+  }
+  static updateStock(productId, newStock) {
+    const products = JSON.parse(localStorage.getItem(Inventory.STORAGE_KEY) || "[]");
+    const idx = products.findIndex(p => p.id === productId);
+    if (idx >= 0) {
+      products[idx].stock = newStock;
+      localStorage.setItem(Inventory.STORAGE_KEY, JSON.stringify(products));
+    }
+  }
+  static getById(productId) {
+    const products = JSON.parse(localStorage.getItem(Inventory.STORAGE_KEY) || "[]");
+    const raw = products.find(p => p.id === productId);
+    return raw ? new Product(raw) : null;
+  }
+  static listSoldOut() {
+    const products = JSON.parse(localStorage.getItem(Inventory.STORAGE_KEY) || "[]");
+    return products.filter(p => p.stock <= 0).map(p => new Product(p));
+  }
+}
 
-  if (name && lastname) {
-    customerData = { name, lastname };
-    localStorage.setItem('customerData', JSON.stringify(customerData));
-    displayCustomerInfo();
+class CartItem {
+  constructor(productId, name, price, qty) {
+    this.productId = productId;
+    this.name = name;
+    this.price = price;
+    this.qty = qty;
+  }
+  get subtotal() {
+    return this.qty * this.price;
+  }
+}
 
-    showToast('Información guardada correctamente', 'success');
-  } else {
-    showToast('Por favor complete todos los campos', 'warning');
+class Cart {
+  static STORAGE_KEY = "cart";
+  static get() {
+    const raw = JSON.parse(localStorage.getItem(Cart.STORAGE_KEY) || "[]");
+    return raw.map(i => new CartItem(i.productId, i.name, i.price, i.qty));
+  }
+  static save(items) {
+    localStorage.setItem(Cart.STORAGE_KEY, JSON.stringify(items));
+  }
+  static add(product, qty) {
+    const items = Cart.get();
+    const existing = items.find(i => i.productId === product.id);
+    const newQty = (existing?.qty || 0) + qty;
+    const stock = Inventory.getById(product.id)?.stock ?? 0;
+    if (newQty > stock) {
+      throw new Error(`No hay stock suficiente. Disponible: ${stock}`);
+    }
+    if (existing) {
+      existing.qty = newQty;
+    } else {
+      items.push(new CartItem(product.id, product.name, product.price, qty));
+    }
+    Cart.save(items);
+  }
+  static setQty(productId, qty) {
+    const items = Cart.get();
+    const it = items.find(i => i.productId === productId);
+    if (!it) return;
+    const stock = Inventory.getById(productId)?.stock ?? 0;
+    if (qty > stock) throw new Error(`No hay stock suficiente. Disponible: ${stock}`);
+    it.qty = qty;
+    if (it.qty <= 0) {
+      Cart.remove(productId);
+    } else {
+      Cart.save(items);
+    }
+  }
+  static remove(productId) {
+    const items = Cart.get().filter(i => i.productId !== productId);
+    Cart.save(items);
+  }
+  static clear() {
+    localStorage.removeItem(Cart.STORAGE_KEY);
+  }
+  static total() {
+    return Cart.get().reduce((acc, i) => acc + i.subtotal, 0);
   }
 }
 
@@ -40,151 +116,91 @@ function showToast(message, type = 'info') {
   const toastContainer = document.createElement('div');
   toastContainer.className = 'position-fixed top-0 end-0 p-3';
   toastContainer.style.zIndex = '1050';
-
   const toastId = 'toast-' + Date.now();
   toastContainer.innerHTML = `
-        <div id="${toastId}" class="toast" role="alert">
-            <div class="toast-header">
-                <strong class="me-auto text-${type}">Notificación</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast"></button>
-            </div>
-            <div class="toast-body">
-                ${message}
-            </div>
-        </div>
-    `;
-
-  document.body.appendChild(toastContainer);
-  const toast = new bootstrap.Toast(document.getElementById(toastId));
-  toast.show();
-
-  setTimeout(() => {
-    document.body.removeChild(toastContainer);
-  }, 5000);
-}
-
-function renderProducts(productsToRender = allProducts) {
-  const container = document.getElementById('productsContainer');
-  container.innerHTML = '';
-
-  productsToRender.forEach(product => {
-    const productCard = document.createElement('div');
-    productCard.className = 'col-md-6 col-lg-4 mb-4';
-
-    productCard.innerHTML = `
-  <div class="card h-100 shadow-sm bg-dark text-white">
-    <img src="${product.image}" class="card-img-top product-img" alt="${product.name}">
-    <div class="card-body d-flex flex-column">
-      <h5 class="card-title">${product.name}</h5>
-      <p class="card-text"><strong>Precio: $${product.price}</strong></p>
-      <div class="mt-auto">
-        <button class="btn btn-success w-100 mb-2"
-                onclick="addToCart(${product.id})"
-                data-bs-toggle="tooltip" 
-                data-bs-placement="top" 
-                title="Agregar ${product.name} al carrito">
-           Agregar al Carrito
-        </button>
-        <button class="btn btn-danger w-100"
-                onclick="removeFromCart(${product.id})"
-                data-bs-toggle="tooltip" 
-                data-bs-placement="top" 
-                title="Eliminar ${product.name} del carrito">
-          Eliminar del Carrito
-        </button>
+    <div id="${toastId}" class="toast align-items-center text-bg-${type} border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body">${message}</div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
       </div>
+    </div>`;
+  document.body.appendChild(toastContainer);
+  const toastEl = new bootstrap.Toast(document.getElementById(toastId), { delay: 2000 });
+  toastEl.show();
+  setTimeout(() => toastContainer.remove(), 2200);
+}
+
+function productCard(p) {
+  const disabled = p.stock <= 0 ? "disabled" : "";
+  const stockBadge = p.stockLabel ? `<span class="badge bg-${p.stock<=0?'danger':p.stock===1?'warning':'info'}">${p.stockLabel}</span>` : "";
+  return `
+  <div class="col-md-3 mb-4">
+    <div class="card h-100 shadow-sm">
+      <img src="${p.image}" class="card-img-top" alt="${p.name}">
+      <div class="card-body d-flex flex-column">
+        <h5 class="card-title d-flex justify-content-between align-items-center">
+          <span>${p.name}</span>
+          ${stockBadge}
+        </h5>
+        <p class="card-text fw-bold text-success mb-2">$${p.price.toLocaleString()}</p>
+        <div class="input-group mb-2">
+          <span class="input-group-text">Cant.</span>
+          <input type="number" class="form-control" min="1" max="${Math.max(p.stock,0)}" value="1" id="qty-${p.id}" ${disabled}>
+        </div>
+        <div class="mt-auto d-grid gap-2">
+          <button class="btn btn-primary" ${disabled} onclick="handleAdd(${p.id})">Agregar al carrito</button>
+        </div>
+      </div>
+      ${p.stock<=0 ? '<div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-dark bg-opacity-50 text-white fw-bold">AGOTADO</div>': ''}
     </div>
-  </div>
-`;
-
-    container.appendChild(productCard);
-  });
-
-  const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-  tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl);
-  });
+  </div>`;
 }
 
-function filterProducts() {
-  const filterValue = document.getElementById('productFilter').value.toLowerCase();
-
-  if (filterValue === '') {
-    allProducts = [...products];
-  } else {
-    allProducts = products.filter(product =>
-      product.name.toLowerCase().includes(filterValue) ||
-      product.id.toString().includes(filterValue) ||
-      product.price.toString().includes(filterValue)
-    );
+async function renderProducts(filter="") {
+  const container = document.getElementById("product-list");
+  const inv = await Inventory.load();
+  let list = inv;
+  if (filter) {
+    const q = filter.toLowerCase();
+    list = inv.filter(p => p.name.toLowerCase().includes(q));
   }
-
-  renderProducts();
+  container.innerHTML = list.map(productCard).join("");
+  renderSoldOutAlert();
 }
 
-function addToCart(productId) {
-  const product = products.find(p => p.id === productId);
-  if (!product) return;
-
-  if (!customerData) {
-    showToast('Por favor ingrese sus datos antes de agregar productos al carrito', 'warning');
-    document.getElementById('customerName').focus();
+function renderSoldOutAlert() {
+  const out = Inventory.listSoldOut();
+  const alert = document.getElementById("soldOutAlert");
+  if (!alert) return;
+  if (out.length === 0) {
+    alert.innerHTML = "";
+    alert.style.display = "none";
     return;
   }
-
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-  cart.push({
-    id: product.id,
-    name: product.name,
-    price: product.price
-  });
-
-  localStorage.setItem('cart', JSON.stringify(cart));
-
-  showToast(`${product.name} agregado al carrito`, 'success');
-  updateCartCounter();
+  alert.style.display = "block";
+  alert.className = "alert alert-warning";
+  alert.innerHTML = `<strong>Productos sin stock:</strong> ${out.map(p=>p.name).join(", ")}`;
 }
 
-function removeFromCart(productId) {
-  let cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const index = cart.findIndex(item => item.id === productId);
-  if (index !== -1) {
-    const removed = cart.splice(index, 1)[0];
-    localStorage.setItem('cart', JSON.stringify(cart));
-    showToast(`${removed.name} eliminado del carrito`, 'info');
+window.handleAdd = function(productId) {
+  const p = Inventory.getById(productId);
+  if (!p) return;
+  const qtyInput = document.getElementById(`qty-${productId}`);
+  const qty = Math.max(1, parseInt(qtyInput?.value || "1", 10));
+  try {
+    Cart.add(p, qty);
+    showToast(`${p.name} x${qty} agregado(s) al carrito`, "success");
     updateCartCounter();
-  } else {
-    showToast('Este producto no está en el carrito', 'warning');
+  } catch (e) {
+    showToast(e.message, "danger");
   }
-}
+};
 
-function updateCartCounter() {
-  const cart = JSON.parse(localStorage.getItem('cart')) || [];
-  const cartIcon = document.querySelector('a[href="carrito.html"]');
+window.filterProducts = function() {
+  const v = document.getElementById("productFilter")?.value || "";
+  renderProducts(v);
+};
 
-  const existingCounter = cartIcon.querySelector('.cart-counter');
-  if (existingCounter) {
-    existingCounter.remove();
-  }
-
-  if (cart.length > 0) {
-    const counter = document.createElement('span');
-    counter.className = 'position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-counter';
-    counter.style.fontSize = '0.7rem';
-    counter.textContent = cart.length;
-    cartIcon.style.position = 'relative';
-    cartIcon.appendChild(counter);
-  }
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-  displayCustomerInfo();
+document.addEventListener("DOMContentLoaded", () => {
   renderProducts();
-  updateCartCounter();
-
-  const carousel = new bootstrap.Carousel(document.querySelector('#promoCarousel'), {
-    interval: 4000,
-    wrap: true
-  });
 });

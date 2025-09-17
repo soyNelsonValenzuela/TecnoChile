@@ -1,184 +1,79 @@
-# Tecno Chile - Tienda Online Completa
+# 🛒 Tecno Chile – Tienda Online
 
-## 🛒 Descripción
+Este proyecto corresponde a la actividad **"Orientación a Objetos en JavaScript"** dentro del programa de desarrollo web.  
+El objetivo fue construir una tienda online con carrito de compras dinámico, utilizando **JavaScript orientado a objetos**, Bootstrap y estilos propios.
 
-Tecno Chile es una tienda online completamente funcional desarrollada como proyecto de **Fundamentos de Programación en JavaScript**. El sitio web implementa un sistema completo de e-commerce con carrito de compras, gestión de productos, filtrado, y todas las funcionalidades requeridas para una experiencia de compra moderna.
+## 🚀 Características principales
 
-**🆕 Funcionalidades Implementadas:**
-- ✅ **Carrito de compras completo** con agregar, eliminar y vaciar
-- ✅ **Bootstrap 5.3.0** con carousel, tooltips, modals y más
-- ✅ **Gestión de datos del cliente** con localStorage
-- ✅ **Filtrado de productos** en tiempo real
-- ✅ **Cálculo automático de totales**
-- ✅ **Proceso de checkout funcional**
-- ✅ **Diseño completamente responsivo**
+- **Listado de productos dinámico** cargado desde un archivo `JSON` (`assets/data/products.json`).
+- **Carrito de compras completo**:
+  - Agregar productos con cantidad seleccionada.
+  - Modificar cantidades directamente desde el carrito (incrementar, decrementar o editar).
+  - Eliminar ítems o vaciar el carrito completo.
+- **Validación de stock**:
+  - No permite agregar más unidades de las disponibles.
+  - Muestra mensajes especiales:
+    - `Agotado` → producto no se puede agregar.
+    - `¡Último!` → cuando queda 1 en inventario.
+    - `Quedan X` → cuando quedan menos de 4 unidades.
+- **Checkout**:
+  - Rebaja automáticamente el stock tras la compra.
+  - Si algún producto llega a stock 0, se alerta mediante un **correo automático (mailto)** al responsable.
+- **UI con Bootstrap 5** y estilos personalizados (`css/style.css`):
+  - Cards con hover, gradientes y sombras.
+  - Navbar sticky y footer pegado al fondo.
+  - Sección especial "Nuestra Propuesta" con grid responsive.
 
-## 🛍️ Productos Disponibles
+## 📂 Estructura del proyecto
 
-| ID | PRODUCTO   | PRECIO |
-|----|------------|--------|
-| 1  | Reloj      | $300   |
-| 2  | Audifonos  | $200   |
-| 3  | Audifonos  | $100   |
-| 4  | Silla      | $400   |
-
-
-## ✨ Características Principales
-
-- **Diseño Responsivo**: Optimizado para dispositivos móviles, tablets y desktop
-- **Navegación Intuitiva**: Interfaz clara y fácil de usar
-- **Accesibilidad**: Cumple con estándares de accesibilidad web (WCAG)
-- **Moda Sostenible**: Enfoque en materiales reciclados y prácticas eco-amigables
-- **Colecciones Diversas**: Múltiples líneas de productos sostenibles
-- **Carrito de Compras Funcional**: Agregar, visualizar, calcular total y vaciar productos
-
-
-## 🏗️ Estructura del Proyecto
-
-```
+```bash
 tienda-online/
-├── index.html                           # Página principal
-├── tienda.html                          # Página de tienda
-├── sobre-nosotros.html                  # Información sobre la empresa
-├── blog.html                            # Blog de contenido
-├── contacto.html                        # Página de contacto
-├── coleccion-eco-chic.html             # Colección Eco-Chic
-├── coleccion-estilo-sostenible.html    # Colección Estilo Sostenible
-├── coleccion-accesorios.html           # Colección de Accesorios
-├── styles/
-│   └── style.css                       # Estilos principales
-├── img/
-│   ├── Logo.svg                        # Logo de la marca
-│   ├── Herosection.jpg                 # Imagen principal del hero
-│   ├── Coleccion1.jpg                  # Imagen colección 1
-│   ├── Coleccion2.jpg                  # Imagen colección 2
-│   ├── Coleccion3.jpg                  # Imagen colección 3
-│   ├── search.svg                      # Icono de búsqueda
-│   ├── user.svg                        # Icono de usuario
-│   ├── shopping-cart.svg               # Icono de carrito
-│   ├── instagram.svg                   # Icono de Instagram
-│   ├── facebook.svg                    # Icono de Facebook
-│   └── twitter.svg                     # Icono de Twitter
-└── README.md                           # Este archivo
+├── index.html                # Página principal
+├── pages/                    # Páginas internas
+│   ├── productos.html         # Listado de productos
+│   ├── carrito.html           # Carrito de compras
+│   ├── user.html              # Datos de cliente
+│   ├── sobre-nosotros.html    # Información de la empresa
+│   └── contacto.html          # Formulario de contacto
+├── js/                       # Lógica en JavaScript
+│   ├── tienda.js              # Renderizado de productos y carrito (POO)
+│   ├── carrito.js             # Gestión del carrito y checkout
+│   └── user.js                # Manejo de datos de cliente
+├── css/style.css              # Estilos principales
+├── assets/
+│   ├── img/                   # Logos e imágenes
+│   └── data/products.json     # Catálogo de productos
+└── README.md
 ```
 
-## 📱 Páginas del Sitio
+## ⚙️ Requisitos previos
 
-### 🏠 Página Principal (index.html)
-- Hero section con llamada a la acción
-- Showcase de las 3 colecciones principales
-- Sección de compromiso con prácticas sostenibles
-- Información sobre materiales reciclados y producción eco-amigable
+- Navegador moderno (Chrome, Firefox, Edge).
+- [Node.js](https://nodejs.org/) (opcional, para montar un servidor local).
+- Conexión a internet para Bootstrap vía CDN.
 
-### 🛒 Tienda (tienda.html)
-- Página de productos (en construcción)
-- Integración con sistema de carrito de compras
+## ▶️ Ejecución
 
-### 👥 Sobre Nosotros (sobre-nosotros.html)
-- Historia y valores de la empresa
-- Compromiso con la sostenibilidad
+1. Clonar el repositorio o descargar el `.zip`.
+2. Abrir la carpeta en tu entorno local.
+3. **Importante:** debido a que se usa `fetch` para leer el archivo `products.json`, es necesario abrir la tienda con un **servidor local** (no funciona con `file://`).  
+   Opciones:
+   - Con Node.js:  
+     ```bash
+     npx serve tienda-online
+     ```
+   - O usando extensiones como *Live Server* en VS Code.
+4. Visitar en el navegador la ruta del servidor (ej: `http://localhost:3000`).
 
-### 📝 Blog (blog.html)
-- Contenido educativo sobre moda sostenible
-- Consejos y tendencias eco-friendly
+## 📧 Alerta de stock
 
-### 📞 Contacto (contacto.html)
-- Formulario de contacto
-- Información de la empresa
+Cuando un producto queda sin stock tras la compra, se genera automáticamente un **correo al responsable** (usando `mailto:`).  
+Para cambiar el correo destinatario, editar en `js/carrito.js` la variable:
 
-### 👗 Colecciones
-- **Eco-Chic**: Vestidos elegantes y ecológicos
-- **Estilo Sostenible**: Trajes y camisas sostenibles
-- **Accesorios**: Complementos eco-friendly
+```js
+const mail = "responsable@tecnochile.cl";
+```
 
-## 🎨 Tecnologías Utilizadas
+## 👨‍💻 Autor
 
-- **HTML5**: Estructura semántica moderna
-- **CSS3**: Estilos responsivos y animaciones
-- **JavaScript**: Interactividad (próximamente)
-- **SVG**: Iconos escalables
-- **Flexbox**: Layout responsivo
-
-## 🌟 Características Técnicas
-
-### Accesibilidad
-- Textos alternativos descriptivos en imágenes
-- Navegación con teclado
-- Atributos `aria-label` y `aria-current`
-- Estructura semántica HTML5
-
-### SEO
-- Meta tags optimizados
-- Estructura de headings jerárquica
-- URLs descriptivas
-- Contenido semántico
-
-### Responsividad
-- Diseño mobile-first
-- Breakpoints optimizados
-- Imágenes adaptativas
-- Flexbox para layouts
-
-## 🚀 Instalación y Uso
-
-1. **Clona el repositorio**:
-   ```bash
-   git clone [url-del-repositorio]
-   cd pulgastein
-   ```
-
-2. **Abre el proyecto**:
-   - Abre `index.html` en tu navegador web
-   - O usa un servidor local para desarrollo
-
-3. **Servidor local (opcional)**:
-   ```bash
-   # Con Python 3
-   python -m http.server 8000
-   
-   # Con Node.js (si tienes live-server instalado)
-   npx live-server
-   ```
-
-## 🎯 Próximas Características
-
-- [ ] Funcionalidad de carrito de compras
-- [ ] Sistema de filtrado de productos
-- [ ] Formulario de contacto funcional
-- [ ] Integración con redes sociales
-- [ ] Blog con sistema de comentarios
-- [ ] Optimización de rendimiento
-- [ ] Implementación de PWA
-
-## 🌍 Compromiso Sostenible
-
-VerdeModa se compromete con:
-
-- **♻️ Materiales Reciclados**: Uso de materiales reciclados para reducir residuos
-- **🌱 Producción Eco-Amigable**: Procesos que minimizan el consumo de energía y agua
-- **🤝 Abastecimiento Ético**: Colaboración con proveedores comprometidos con la sostenibilidad
-
-## 📄 Licencia
-
-Este proyecto está bajo la Licencia MIT - ver el archivo LICENSE para más detalles.
-
-## 🤝 Contribución
-
-Las contribuciones son bienvenidas. Por favor:
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/AmazingFeature`)
-3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
-4. Push a la rama (`git push origin feature/AmazingFeature`)
-5. Abre un Pull Request
-
-## 👨‍💻 Autores
-
-- **Noemi Fagerstrom** - [@NoemiFagerstromLinck](https://github.com/NoemiFagerstromLinck)
-- **Nelson Valenzuela** - [@soyNelsonValenzuela](https://github.com/soyNelsonValenzuela)
-- **Patricio Barahona** - [@barahona-gallardo](https://github.com/barahona-gallardo)
-- **Juan Pablo Berrios** - [@MasterdjinnCL](https://github.com/MasterdjinnCL)
-
----
-
-**VerdeModa** - *Vístete responsablemente* 🌱
+Proyecto desarrollado por **Nelson Valenzuela** como parte de su formación en Desarrollo Web Fullstack.  
