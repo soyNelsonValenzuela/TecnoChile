@@ -1,4 +1,3 @@
-// /js/carrito.js — carrito con cantidades, modificar, limpiar y checkout que rebaja stock
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 let customerData = JSON.parse(localStorage.getItem('customerData')) || null;
@@ -140,7 +139,6 @@ function renderCart() {
   }
   totalEl.innerText = total.toLocaleString();
 
-  // Delegated events for qty controls
   itemsContainer.onclick = (e) => {
     const btn = e.target.closest("button[data-action]");
     if (!btn) return;
@@ -203,7 +201,6 @@ function checkout() {
   const products = Inventory.get();
   const soldOutNames = [];
 
-  // Validación final de stock y rebaja
   for (const it of items) {
     const p = products.find(x => x.id === it.productId);
     if (!p) continue;
@@ -212,7 +209,7 @@ function checkout() {
       return;
     }
   }
-  // Rebajar
+
   for (const it of items) {
     const p = products.find(x => x.id === it.productId);
     p.stock -= it.qty;

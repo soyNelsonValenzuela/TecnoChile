@@ -1,11 +1,14 @@
-// /js/tienda.js — versión OOP con stock y JSON
 class Product {
-  constructor({ id, name, price, image, stock }) {
+  constructor({ id, name, price, image, stock, description = "Sin descripción", category = "Sin categoría", label = "", tags = [] }) {
     this.id = id;
     this.name = name;
     this.price = price;
     this.image = image;
     this.stock = stock;
+    this.description = description;
+    this.category = category;
+    this.label = label;
+    this.tags = Array.isArray(tags) ? tags : (typeof tags === 'string' && tags ? tags.split(',').map(s=>s.trim()) : []);
   }
   get stockLabel() {
     if (this.stock <= 0) return "Agotado";
@@ -16,20 +19,62 @@ class Product {
 }
 
 class Inventory {
+static get _arr() {
+    return JSON.parse(localStorage.getItem(Inventory.STORAGE_KEY) || "[]");
+  }
+  static getMinMaxPrice() {
+    const arr = Inventory._arr;
+    const prices = arr.map(p => Number(p.price) || 0);
+    if (prices.length === 0) return { min: 0, max: 0 };
+    return { min: Math.min(...prices), max: Math.max(...prices) };
+  }
+  static getCategories() {
+    const arr = Inventory._arr;
+    const set = new Set(arr.map(p => p.category || "Sin categoría"));
+    return Array.from(set);
+  }
   static STORAGE_KEY = "inventory";
   static async load() {
-    // Si ya está en localStorage, usarlo; si no, leer JSON y persistirlo
-    const cached = localStorage.getItem(Inventory.STORAGE_KEY);
-    if (cached) {
-      const arr = JSON.parse(cached);
-      return arr.map(p => new Product(p));
+  const fromLS = JSON.parse(localStorage.getItem(Inventory.STORAGE_KEY) || "null");
+  const assetsBase = location.pathname.includes("/pages/") ? "../assets" : "./assets";
+  let defaults = [];
+  try {
+    defaults = await fetch(`${assetsBase}/data/products.json`)
+      .then(r => r.ok ? r.json() : [])
+      .catch(() => []);
+    if (!Array.isArray(defaults)) defaults = [];
+  } catch { defaults = []; }
+
+  if (!Array.isArray(fromLS) || fromLS.length === 0) {
+    if (defaults.length > 0) {
+      localStorage.setItem(Inventory.STORAGE_KEY, JSON.stringify(defaults));
+      return defaults.map(obj => new Product(obj));
     }
-    const res = await fetch("../assets/data/products.json");
-    const data = await res.json();
-    localStorage.setItem(Inventory.STORAGE_KEY, JSON.stringify(data));
-    return data.map(p => new Product(p));
+    localStorage.setItem(Inventory.STORAGE_KEY, "[]");
+    return [];
   }
-  static save(products) {
+
+  const defById = Object.fromEntries(defaults.map(d => [Number(d.id), d]));
+  const merged = fromLS.map(p => {
+    const d = defById[Number(p.id)] || {};
+    return new Product({
+      id: p.id,
+      name: p.name ?? d.name,
+      price: p.price ?? d.price,
+      image: p.image ?? d.image,
+      stock: p.stock ?? d.stock,
+      description: (p.description && String(p.description).trim()) ? p.description : (d.description ?? "Sin descripción"),
+      category: (p.category && String(p.category).trim()) ? p.category : (d.category ?? "Sin categoría"),
+      label: (p.label && String(p.label).trim()) ? p.label : (d.label ?? ""),
+      tags: (p.tags && p.tags.length) ? p.tags : (d.tags ?? [])
+    });
+  });
+
+  localStorage.setItem(Inventory.STORAGE_KEY, JSON.stringify(merged));
+
+  return merged;
+}
+static save(products) {
     localStorage.setItem(Inventory.STORAGE_KEY, JSON.stringify(products));
   }
   static updateStock(productId, newStock) {
@@ -132,17 +177,17 @@ function showToast(message, type = 'info') {
 
 function productCard(p) {
   const disabled = p.stock <= 0 ? "disabled" : "";
-  const stockBadge = p.stockLabel ? `<span class="badge bg-${p.stock<=0?'danger':p.stock===1?'warning':'info'}">${p.stockLabel}</span>` : "";
+  const labelBadge = p.label ? `<span class="badge bg-info text-dark me-1">${p.label}</span>` : "";
+  const catBadge = p.category ? `<span class="badge bg-secondary">${p.category}</span>` : "";
   return `
-  <div class="col-md-3 mb-4">
-    <div class="card h-100 shadow-sm">
-      <img src="${p.image}" class="card-img-top" alt="${p.name}">
+  <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
+    <div class="card h-100 shadow-sm position-relative">
+      <img src="${p.image}" class="card-img-top" alt="${p.name}" loading="lazy">
       <div class="card-body d-flex flex-column">
-        <h5 class="card-title d-flex justify-content-between align-items-center">
-          <span>${p.name}</span>
-          ${stockBadge}
-        </h5>
-        <p class="card-text fw-bold text-success mb-2">$${p.price.toLocaleString()}</p>
+        <h5 class="card-title">${p.name}</h5>
+        <p class="mb-2 small text-white">${p.description || ""}</p>
+        <div class="mb-2">${labelBadge}${catBadge}</div>
+        <p class="card-text fw-bold text-success mb-2">$${(Number(p.price)||0).toLocaleString()}</p>
         <div class="input-group mb-2">
           <span class="input-group-text">Cant.</span>
           <input type="number" class="form-control" min="1" max="${Math.max(p.stock,0)}" value="1" id="qty-${p.id}" ${disabled}>
@@ -156,14 +201,23 @@ function productCard(p) {
   </div>`;
 }
 
-async function renderProducts(filter="") {
+async function renderProducts() {
   const container = document.getElementById("product-list");
   const inv = await Inventory.load();
-  let list = inv;
-  if (filter) {
-    const q = filter.toLowerCase();
-    list = inv.filter(p => p.name.toLowerCase().includes(q));
-  }
+  const text = (document.getElementById("textFilter")?.value || document.getElementById("productFilter")?.value || "").toLowerCase().trim();
+  const category = (document.getElementById("categoryFilter")?.value || "").toLowerCase();
+  const priceMax = Number(document.getElementById("priceFilter")?.value || 0);
+  let list = inv.filter(p => {
+    const withinCategory = !category || (p.category || "").toLowerCase() === category;
+    const withinPrice = !priceMax || Number(p.price) <= priceMax;
+    if (!text) return withinCategory && withinPrice;
+    const haystack = [
+      p.name, p.description, p.category, p.label,
+      ...(Array.isArray(p.tags) ? p.tags : [])
+    ].filter(Boolean).join(" ").toLowerCase();
+    const matchesText = haystack.includes(text);
+    return withinCategory && withinPrice && matchesText;
+  });
   container.innerHTML = list.map(productCard).join("");
   renderSoldOutAlert();
 }
@@ -201,6 +255,30 @@ window.filterProducts = function() {
   renderProducts(v);
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  renderProducts();
-});
+document.addEventListener("DOMContentLoaded", () => { initFilters(); renderProducts(); });
+
+async function initFilters() {
+  const inv = await Inventory.load();
+  const sel = document.getElementById("categoryFilter");
+  if (sel) {
+    const cats = Array.from(new Set(inv.map(p => p.category || "Sin categoría")));
+    sel.innerHTML = `<option value="">Todas</option>` + cats.map(c => `<option value="${c}">${c}</option>`).join("");
+  }
+  const range = document.getElementById("priceFilter");
+  const priceOut = document.getElementById("priceFilterValue");
+ if (range) {
+  const min = Math.min(...inv.map(p => Number(p.price) || 0));
+  const max = Math.max(...inv.map(p => Number(p.price) || 0));
+  range.min = String(min);
+  range.max = String(max);
+  range.value = String(max); 
+  if (priceOut) priceOut.textContent = `$${Number(range.value).toLocaleString()}`;
+  range.addEventListener("input", () => {
+    if (priceOut) priceOut.textContent = `$${Number(range.value).toLocaleString()}`;
+    renderProducts();
+  });
+}
+  const tf = document.getElementById("textFilter") || document.getElementById("productFilter");
+  if (tf) tf.addEventListener("input", () => renderProducts());
+  if (sel) sel.addEventListener("change", () => renderProducts());
+}

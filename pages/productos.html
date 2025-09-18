@@ -28,7 +28,8 @@
                             alt="Buscar"></a>
                     <a href="#" class="icon-btn" aria-label="Cuenta de usuario"><img src="../assets/img/user.svg"
                             alt="Usuario"></a>
-                    <a href="./carrito.html" class="icon-btn cart-counter" aria-label="Carrito"><img src="../assets/img/shopping-cart.svg" alt="Carrito"></a>
+                    <a href="./carrito.html" class="icon-btn cart-counter" aria-label="Carrito"><img
+                            src="../assets/img/shopping-cart.svg" alt="Carrito"></a>
                 </div>
 
                 <div class="collapse navbar-collapse" id="mainNav">
@@ -36,7 +37,9 @@
                         <li class="nav-item"><a class="nav-link" href="./productos.html">Productos</a></li>
                         <li class="nav-item"><a class="nav-link" href="./sobre-nosotros.html">Sobre nosotros</a></li>
                         <li class="nav-item"><a class="nav-link" href="./contacto.html">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./admin.html">Administración</a></li>
                     </ul>
+
 
                     <div class="d-none d-lg-flex align-items-center gap-2">
                         <div id="customerInfoBadge"></div>
@@ -45,7 +48,8 @@
                                     alt="Buscar"></a>
                             <a href="./user.html" class="icon-btn" aria-label="Cuenta de usuario"><img
                                     src="../assets/img/user.svg" alt="Usuario"></a>
-                           <a href="./carrito.html" id="cartIcon" class="icon-btn cart-counter" aria-label="Carrito"><img src="../assets/img/shopping-cart.svg" alt="Carrito"></a>
+                            <a href="./carrito.html" id="cartIcon" class="icon-btn cart-counter"
+                                aria-label="Carrito"><img src="../assets/img/shopping-cart.svg" alt="Carrito"></a>
                         </div>
                     </div>
                 </div>
@@ -54,7 +58,6 @@
     </header>
 
     <main>
-        <!-- Banner hero arriba -->
         <section class="shop-banner-hero my-5 py-5">
             <div class="container-fluid">
                 <div class="row align-items-center justify-content-center flex-nowrap">
@@ -72,31 +75,38 @@
             </div>
         </section>
 
-        <!-- Productos primero -->
         <div class="container my-5">
-            <div class="row mb-4">
-                <div class="col-12">
-                    <div class="input-group">
-                        <span class="input-group-text"><i class="bi bi-search"></i>🔍</span>
-                        <input type="text" class="form-control" id="productFilter" placeholder="Buscar productos..."
-                            onkeyup="filterProducts()">
+           
+            <div id="soldOutAlert" style="display:none;"></div>
+            <div class="container mt-4">
+                <div class="row g-3 align-items-end">
+                    <div class="col-12 col-md-4">
+                        <label for="textFilter" class="form-label">Búsqueda</label>
+                        <input type="text" id="textFilter" class="form-control"
+                            placeholder="Nombre, descripción, categoría o etiqueta">
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <label for="categoryFilter" class="form-label">Categoría</label>
+                        <select id="categoryFilter" class="form-select"></select>
+                    </div>
+                    <div class="col-6 col-md-5">
+                        <label for="priceFilter" class="form-label d-flex justify-content-between">
+                            <span>Precio máximo</span>
+                            <span id="priceFilterValue"></span>
+                        </label>
+                        <input type="range" id="priceFilter" class="form-range" min="0" max="0" step="10">
                     </div>
                 </div>
             </div>
-            <div id="soldOutAlert" style="display:none;"></div>
             <div class="row">
-            <div id="product-list" class="row mt-3">
-                <div class="col-12">
-                    <h2 class="mb-4">Nuestros Productos</h2>
-                    <div class="row" id="productsContainer"></div>
-                </div>
+                <div id="product-list" class="row mt-3"></div>
             </div>
-        </div>
 
     </main>
 
     <footer>
-        <div class="footer-container d-flex flex-column justify-content-center align-items-center gap-4 py-4 px-3 px-lg-5">
+        <div
+            class="footer-container d-flex flex-column justify-content-center align-items-center gap-4 py-4 px-3 px-lg-5">
             <nav class="footer-nav">
                 <a href="#privacy">Privacy Policy</a>
                 <a href="#terms">Terms of Service</a>

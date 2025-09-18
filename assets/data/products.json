@@ -4,28 +4,62 @@
     "name": "Reloj",
     "price": 300,
     "image": "../assets/img/productos/reloj.webp",
-    "stock": 10
-  
+    "stock": 10,
+    "description": "Reloj inteligente con monitoreo de actividad, notificaciones y batería de larga duración.",
+    "category": "Wearables",
+    "label": "smartwatch",
+    "tags": [
+      "reloj",
+      "smartwatch",
+      "fitness",
+      "bluetooth"
+    ]
   },
   {
     "id": 2,
     "name": "Audífonos Pro",
     "price": 200,
     "image": "../assets/img/productos/audifono-1.jpeg",
-    "stock": 3
+    "stock": 3,
+    "description": "Audífonos inalámbricos con cancelación de ruido activa y estuche de carga rápida.",
+    "category": "Audio",
+    "label": "audifonos pro",
+    "tags": [
+      "audio",
+      "inalámbricos",
+      "ANC",
+      "bluetooth"
+    ]
   },
   {
     "id": 3,
     "name": "Audífonos Lite",
     "price": 100,
     "image": "../assets/img/productos/audifono-2.jpeg",
-    "stock": 1
+    "stock": 1,
+    "description": "Audífonos ligeros con buen aislamiento pasivo y micrófono integrado.",
+    "category": "Audio",
+    "label": "audifonos lite",
+    "tags": [
+      "audio",
+      "ligeros",
+      "micrófono"
+    ]
   },
   {
     "id": 4,
     "name": "Silla Gamer",
     "price": 400,
     "image": "../assets/img/productos/silla-gamer.jpeg",
-    "stock": 0
+    "stock": 0,
+    "description": "Silla gamer ergonómica con soporte lumbar, reclinable y materiales transpirables.",
+    "category": "Muebles",
+    "label": "silla gamer",
+    "tags": [
+      "silla",
+      "ergonomía",
+      "oficina",
+      "gaming"
+    ]
   }
 ]

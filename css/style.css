@@ -1,6 +1,3 @@
-/* =========================
-   RESET & TOKENS (mobile-first)
-========================= */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,12 +9,12 @@ html {
 
 body {
   display: grid;
-  grid-template-rows: auto 1fr auto; /* header, main, footer */
-  min-height: 100vh; /* ocupa toda la ventana */
+  grid-template-rows: auto 1fr auto; 
+  min-height: 100vh; 
 }
 body {
   display: grid;
-  grid-template-rows: auto 1fr auto; /* header, main, footer */
+  grid-template-rows: auto 1fr auto; 
   min-height: 100vh;
 }
 
@@ -68,9 +65,7 @@ main {
   padding-bottom: var(--space-4);
 }
 
-/* =========================
-   Navbar Bootstrap – estilizado
-========================= */
+
 .main-navbar {
   background: var(--color-negro);
   position: sticky;
@@ -117,7 +112,7 @@ main {
   box-shadow: 0 0 0 2px rgba(0, 207, 255, .5);
 }
 
-/* Iconos del header */
+
 .icons-container {
   display: flex;
   align-items: center;
@@ -151,7 +146,6 @@ main {
   transform: translateY(-2px);
 }
 
-/* Badge cliente (si existe) */
 #customerInfoBadge .badge {
   background: linear-gradient(90deg, #fff 0%, var(--color-celeste) 100%);
   color: #111217;
@@ -159,9 +153,7 @@ main {
   border: none;
 }
 
-/* =========================
-   Banner hero
-========================= */
+
 .shop-banner-hero {
   width: 100%;
   max-width: 100%;
@@ -201,7 +193,6 @@ main {
   border-radius: var(--radius-lg);
 }
 
-/* CTA brillo */
 .button {
   position: relative;
   overflow: hidden;
@@ -231,7 +222,6 @@ main {
   }
 }
 
-/* Cards */
 .card,
 .card.modern-card {
   background: linear-gradient(120deg, #18181b 70%, #7c3aed 95%, var(--color-celeste) 100%);
@@ -258,7 +248,6 @@ main {
   color: #e0e7ef;
 }
 
-/* Tablas / badges */
 .table-dark {
   background: linear-gradient(90deg, #111217 0%, var(--color-celeste) 100%);
   color: #fff;
@@ -283,7 +272,6 @@ main {
 }
 
 .commitment-section {
-  /* misma vibra que el hero */
   background: linear-gradient(100deg, #18181b 60%, #7c3aed 90%, var(--color-celeste) 100%);
   color: var(--color-blanco);
   border-radius: var(--radius-lg);
@@ -294,7 +282,6 @@ main {
   overflow: hidden;
 }
 
-/* brillo suave diagonal */
 .commitment-section::before {
   content: "";
   position: absolute;
@@ -303,7 +290,6 @@ main {
   pointer-events: none;
 }
 
-/* subtítulo pequeño arriba (h2) */
 .commitment-section h2 {
   font-size: .9rem;
   letter-spacing: .2em;
@@ -314,7 +300,6 @@ main {
   text-shadow: 0 2px 12px rgba(0, 207, 255, .33);
 }
 
-/* título principal (h3) */
 .commitment-section h3 {
   font-size: var(--fs-700);
   line-height: 1.1;
@@ -322,7 +307,6 @@ main {
   font-weight: 900;
 }
 
-/* acento bajo el título principal */
 .commitment-section h3::after {
   content: "";
   display: block;
@@ -334,21 +318,18 @@ main {
   box-shadow: 0 2px 12px rgba(0, 207, 255, .35);
 }
 
-/* párrafo intro */
 .commitment-section > p {
   color: #e0e7ef;
   max-width: 60ch;
   margin-bottom: var(--space-4);
 }
 
-/* grid de prácticas */
 .practices-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: var(--space-4);
 }
 
-/* tarjeta de práctica */
 .practice-box {
   background: linear-gradient(120deg, #18181b 70%, #7c3aed 95%, var(--color-celeste) 100%);
   color: var(--color-blanco);
@@ -361,13 +342,11 @@ main {
   overflow: hidden;
 }
 
-/* brillo sutil en hover (match con .card:hover) */
 .practice-box:hover {
   transform: translateY(-6px) scale(1.02);
   box-shadow: 0 8px 32px rgba(0, 207, 255, .27);
 }
 
-/* título de cada práctica */
 .practice-box h4 {
   color: var(--color-celeste);
   font-weight: 800;
@@ -379,13 +358,11 @@ main {
   text-shadow: 0 2px 12px rgba(0, 207, 255, .25);
 }
 
-/* texto de cada práctica */
 .practice-box p {
   color: #e0e7ef;
   margin: 0;
 }
 
-/* accesibilidad: reduce animaciones si el usuario lo prefiere */
 @media (prefers-reduced-motion: reduce) {
   .practice-box,
   .commitment-section h3::after {
@@ -393,7 +370,6 @@ main {
   }
 }
 
-/* Footer */
 footer {
   background: var(--color-negro);
   color: #e0e7ef;
@@ -415,7 +391,6 @@ footer {
 .social-container img {
   height: 28px;
 }
-/* Estilos específicos para Sobre Nosotros */
 .about-section {
   background: linear-gradient(120deg, #fff 70%, #00cfff 100%);
   border-radius: var(--radius-lg);
@@ -460,7 +435,6 @@ footer {
   padding-left: 1rem;
 }
 
-/* Estilos específicos para Contacto */
 .contact-section {
   background: linear-gradient(120deg, #fff 70%, #00cfff 100%);
   border-radius: var(--radius-lg);
@@ -508,7 +482,6 @@ footer {
 }
 
 
-/* Breakpoints */
 @media (min-width: 576px) {
   .banner-img {
     max-height: 220px;

@@ -1,9 +1,8 @@
-// /js/user.js
 (function () {
   const STORAGE_KEY = 'customerData';
 
   function getStored() {
-  const EXPIRATION_MS = 60 * 60 * 1000; // 1 hora
+  const EXPIRATION_MS = 60 * 60 * 1000; 
   try {
     const data = JSON.parse(localStorage.getItem(STORAGE_KEY));
     if (!data) return null;
@@ -21,7 +20,7 @@
   const data = { 
     name: String(name || '').trim(), 
     lastname: String(lastname || '').trim(),
-    savedAt: Date.now() // Guardar timestamp
+    savedAt: Date.now() 
   };
   if (!data.name || !data.lastname) return false;
   try {
@@ -43,9 +42,8 @@
     }
   }
 
-  // Si estamos en user.html, enganchar el formulario
   document.addEventListener('DOMContentLoaded', () => {
-    renderBadge(); // pintar badge si existe
+    renderBadge(); 
 
     const form = document.getElementById('userForm');
     if (form) {
@@ -53,7 +51,6 @@
       const lastInput = document.getElementById('customerLastname');
       const info = document.getElementById('customerInfo');
 
-      // Prefill si existe
       const data = getStored();
       if (data) {
         if (nameInput) nameInput.value = data.name || '';
@@ -66,7 +63,7 @@
         const ok = saveUser(nameInput?.value, lastInput?.value);
         if (ok) {
           if (info) info.innerHTML = `<span class="badge bg-success">Cliente: <strong>${nameInput.value.trim()} ${lastInput.value.trim()}</strong></span>`;
-          renderBadge(); // actualizar badge del header si existe
+          renderBadge(); 
         } else {
           if (info) info.innerHTML = `<span class="text-danger">Por favor ingresa tu nombre y apellido.</span>`;
         }
