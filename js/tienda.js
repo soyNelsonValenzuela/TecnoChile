@@ -179,14 +179,21 @@ function productCard(p) {
   const disabled = p.stock <= 0 ? "disabled" : "";
   const labelBadge = p.label ? `<span class="badge bg-info text-dark me-1">${p.label}</span>` : "";
   const catBadge = p.category ? `<span class="badge bg-secondary">${p.category}</span>` : "";
-  return `
+    const stockBadge = (p.stock <= 0)
+  ? ""
+  : (p.stock === 1
+      ? `<span class="badge bg-danger text-white ms-1">¡Última unidad!</span>`
+      : (p.stock < 4
+          ? `<span class="badge bg-warning text-dark ms-1">Quedan ${p.stock}</span>`
+          : ""));
+return `
   <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
     <div class="card h-100 shadow-sm position-relative">
       <img src="${p.image}" class="card-img-top" alt="${p.name}" loading="lazy">
       <div class="card-body d-flex flex-column">
         <h5 class="card-title">${p.name}</h5>
         <p class="mb-2 small text-white">${p.description || ""}</p>
-        <div class="mb-2">${labelBadge}${catBadge}</div>
+        <div class="mb-2">${labelBadge}${catBadge}${stockBadge}</div>
         <p class="card-text fw-bold text-success mb-2">$${(Number(p.price)||0).toLocaleString()}</p>
         <div class="input-group mb-2">
           <span class="input-group-text">Cant.</span>

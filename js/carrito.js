@@ -117,7 +117,7 @@ function renderCart() {
   for (const it of items) {
     const inv = Inventory.getById(it.productId);
     const max = inv ? inv.stock : it.qty;
-    const row = document.createElement("tr");
+        const row = document.createElement("tr");
     row.innerHTML = `
       <td><span class="badge bg-secondary">${it.productId}</span></td>
       <td><strong>${it.name}</strong></td>
@@ -135,6 +135,7 @@ function renderCart() {
         <button class="btn btn-sm btn-outline-danger" data-action="remove" data-id="${it.productId}">🗑️ Eliminar</button>
       </td>`;
     itemsContainer.appendChild(row);
+
     total += it.subtotal;
   }
   totalEl.innerText = total.toLocaleString();

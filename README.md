@@ -85,3 +85,21 @@ M5AE2-ABP2-ABPRO2/
 ## 👨‍💻 Autor
 Nelson Valenzuela – *Desarrollador Full Stack en formación*  
 Repositorio GitHub: [@soyNelsonValenzuela](https://github.com/soyNelsonValenzuela)
+
+## 🧩 Novedades ABPRO3 – JavaScript Asíncrono
+
+> Extensión del proyecto para cumplir los requisitos de **Javascript Asíncrono** (ABPRO3).
+
+### ✅ Checklist de requisitos cumplidos
+- **Lectura asíncrona de productos con `fetch()`** desde `assets/data/products.json`. (Implementado en `Inventory.load()` en `js/tienda.js`).  
+- **Actualización de stock tras compra** simulando servidor con promesas/`setTimeout` en `js/carrito.js` (durante `checkout()` se descuenta stock “en servidor” y luego se persiste).  
+- **Error por stock insuficiente después de verificación asíncrona** al intentar agregar al carrito; la verificación ocurre antes de confirmar la acción.  
+
+
+### 🏷️ Etiquetas de stock en tarjetas de producto
+- Si `stock === 1` → badge **rojo**: “¡Última unidad!”.  
+- Si `stock < 4` y `> 1` → badge **amarillo**: “Quedan X”.  
+- Caso contrario → no se muestra badge.  
+> Lógica en `js/tienda.js` con la variable `stockBadge` incluida junto a los demás badges en la card.
+
+---
