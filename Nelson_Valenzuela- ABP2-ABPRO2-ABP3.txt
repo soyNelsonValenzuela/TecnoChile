@@ -1,9 +1,0 @@
-ABP2,  ABPRO2, ABP3
-
-Segun lo mencionado en clases el abp 2 y abpro 2 se entragaba sin local storage y en el abp 3 se agregaba el local storage.
-
-En este caso va con local storage y se entrega el mismo codigo en las tres actividades.
-
-REPO:
-
-https://github.com/soyNelsonValenzuela/TecnoChile
