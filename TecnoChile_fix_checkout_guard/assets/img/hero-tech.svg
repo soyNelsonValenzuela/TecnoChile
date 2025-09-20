@@ -1,0 +1,88 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Fondo gradiente -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c3e50;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#34495e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2c3e50;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3498db;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#e74c3c;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#f39c12;stop-opacity:0.8" />
+    </linearGradient>
+  </defs>
+  
+  <rect width="800" height="600" fill="url(#bgGradient)"/>
+  
+  <!-- Elementos decorativos tecnológicos -->
+  <g opacity="0.3">
+    <!-- Circuitos -->
+    <path d="M 50 100 L 150 100 L 150 200 L 250 200" stroke="#3498db" stroke-width="2" fill="none"/>
+    <path d="M 550 400 L 650 400 L 650 300 L 750 300" stroke="#e74c3c" stroke-width="2" fill="none"/>
+    <circle cx="150" cy="100" r="5" fill="#3498db"/>
+    <circle cx="150" cy="200" r="5" fill="#3498db"/>
+    <circle cx="650" cy="400" r="5" fill="#e74c3c"/>
+    <circle cx="650" cy="300" r="5" fill="#e74c3c"/>
+  </g>
+  
+  <!-- Reloj inteligente (grande) -->
+  <g transform="translate(150,180)">
+    <rect x="-40" y="-60" width="80" height="70" rx="20" fill="#34495e"/>
+    <rect x="-35" y="-55" width="70" height="60" rx="15" fill="#1a1a1a"/>
+    <rect x="-30" y="-50" width="60" height="50" rx="10" fill="#0066cc"/>
+    <circle cx="0" cy="-25" r="15" fill="none" stroke="#ffffff" stroke-width="2"/>
+    <line x1="0" y1="-25" x2="0" y2="-35" stroke="#ffffff" stroke-width="2"/>
+    <line x1="0" y1="-25" x2="10" y2="-25" stroke="#ffffff" stroke-width="1"/>
+    <text x="-20" y="-10" fill="#ffffff" font-family="Arial" font-size="8" font-weight="bold">12:45</text>
+  </g>
+  
+  <!-- Audífonos (grande) -->
+  <g transform="translate(400,200)">
+    <path d="M -50 0 Q 0 -40 50 0" fill="none" stroke="#e74c3c" stroke-width="8" stroke-linecap="round"/>
+    <circle cx="-45" cy="5" r="25" fill="#2c3e50"/>
+    <circle cx="-45" cy="5" r="20" fill="#e74c3c"/>
+    <circle cx="45" cy="5" r="25" fill="#2c3e50"/>
+    <circle cx="45" cy="5" r="20" fill="#e74c3c"/>
+  </g>
+  
+  <!-- Silla (grande) -->
+  <g transform="translate(650,350)">
+    <ellipse cx="0" cy="40" rx="30" ry="15" fill="#e74c3c"/>
+    <ellipse cx="0" cy="-20" rx="25" ry="35" fill="#e74c3c"/>
+    <rect x="-35" y="15" width="15" height="6" rx="3" fill="#2c3e50"/>
+    <rect x="20" y="15" width="15" height="6" rx="3" fill="#2c3e50"/>
+    <ellipse cx="0" cy="60" rx="35" ry="5" fill="#2c3e50"/>
+  </g>
+  
+  <!-- Elementos flotantes tecnológicos -->
+  <g opacity="0.6">
+    <!-- Iconos de conectividad -->
+    <g transform="translate(100,350)">
+      <circle cx="0" cy="0" r="3" fill="#3498db"/>
+      <circle cx="10" cy="-5" r="2" fill="#3498db"/>
+      <circle cx="15" cy="5" r="2" fill="#3498db"/>
+      <path d="M 0 0 L 10 -5 M 0 0 L 15 5" stroke="#3498db" stroke-width="1"/>
+    </g>
+    
+    <g transform="translate(700,150)">
+      <circle cx="0" cy="0" r="3" fill="#f39c12"/>
+      <circle cx="-10" cy="-5" r="2" fill="#f39c12"/>
+      <circle cx="-15" cy="5" r="2" fill="#f39c12"/>
+      <path d="M 0 0 L -10 -5 M 0 0 L -15 5" stroke="#f39c12" stroke-width="1"/>
+    </g>
+  </g>
+  
+  <!-- Efectos de luz -->
+  <g opacity="0.4">
+    <ellipse cx="200" cy="150" rx="80" ry="20" fill="url(#techGradient)"/>
+    <ellipse cx="400" cy="180" rx="100" ry="25" fill="url(#techGradient)"/>
+    <ellipse cx="600" cy="320" rx="90" ry="22" fill="url(#techGradient)"/>
+  </g>
+  
+  <!-- Texto principal (se superpone con CSS) -->
+  <g opacity="0.9">
+    <text x="400" y="300" text-anchor="middle" fill="#ffffff" font-family="Arial" font-size="48" font-weight="bold">TECNO CHILE</text>
+    <text x="400" y="340" text-anchor="middle" fill="#ecf0f1" font-family="Arial" font-size="24">Tecnología de Vanguardia</text>
+  </g>
+</svg>

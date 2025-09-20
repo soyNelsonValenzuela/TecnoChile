@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Tecno Chile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="./assets/img/Logo.svg" type="image/svg+xml">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+    <header class="main-navbar">
+        <nav class="navbar navbar-dark navbar-expand-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand d-flex align-items-center gap-2" href="./index.html" aria-label="Ir a inicio">
+                    <span class="logo-text">Tecno <span class="logo-highlight">Chile</span></span>
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="icons-container d-lg-none ms-2">
+                    <a href="#" class="icon-btn" aria-label="Buscar"><img src="./assets/img/search.svg"
+                            alt="Buscar"></a>
+                    <a href="#" class="icon-btn" aria-label="Cuenta de usuario"><img src="./assets/img/user.svg"
+                            alt="Usuario"></a>
+                    <a href="./pages/carrito.html" class="icon-btn" aria-label="Carrito"><img
+                            src="./assets/img/shopping-cart.svg" alt="Carrito"></a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="mainNav">
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="./pages/productos.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./pages/sobre-nosotros.html">Sobre nosotros</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="./pages/contacto.html">Contacto</a></li>
+                        <li class="nav-item"><a class="nav-link" href="./pages/admin.html">Administración</a></li>
+                    </ul>
+
+                    <div class="d-none d-lg-flex align-items-center gap-2">
+                        <div id="customerInfoBadge"></div>
+                        <div class="icons-container me-3">
+                            <a href="#" class="icon-btn" aria-label="Buscar"><img src="./assets/img/search.svg"
+                                    alt="Buscar"></a>
+                            <a href="./pages/user.html" class="icon-btn" aria-label="Cuenta de usuario"><img
+                                    src="./assets/img/user.svg" alt="Usuario"></a>
+                            <a href="./pages/carrito.html" id="cartIcon" class="icon-btn cart-counter"
+                                aria-label="Carrito"><img src="../assets/img/shopping-cart.svg" alt="Carrito"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="shop-banner-hero my-5 py-5">
+            <div class="container-fluid">
+                <div class="row align-items-center justify-content-center flex-nowrap">
+                    <div class="col-md-5 text-center text-md-start">
+                        <h1 class="shop-category-title mb-3">Tecnología Destacada</h1>
+                        <p class="shop-category-desc mb-0">Descubre nuestra colección de productos tecnológicos de
+                            última generación con la mejor calidad y precios del mercado.</p>
+                        <a href="./pages/tienda.html" class="button mt-4">¡COMPRA AHORA!</a>
+                    </div>
+                    <div class="col-md-7 d-flex justify-content-center">
+                        <img src="https://assets-v3.pcfactory.cl/uploads/38c3ce0f-f2bb-4237-b1ca-19396e7a3c44/original/Modyo-WEB-Banner-Principal-1792x490.webp"
+                            alt="Tecnología de vanguardia" class="img-fluid banner-img" style="max-height: 320px;">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="collections-section py-5">
+            <h2 class="text-center mb-4">Nuestros Productos</h2>
+            <div class="container">
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card modern-card h-100 text-center">
+                            <a href="./pages/tienda.html">
+                                <img src="./assets/img/productos/reloj.webp" alt="Relojes Inteligentes"
+                                    class="card-img-top" />
+                            </a>
+                            <div class="card-body">
+                                <h3 class="card-title">Relojes Inteligentes <span class="badge bg-success">Nuevo</span>
+                                </h3>
+                                <p class="card-text">Relojes de última tecnología con funciones avanzadas para
+                                    mantenerte conectado en todo momento.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card modern-card h-100 text-center">
+                            <a href="./pages/tienda.html">
+                                <img src="./assets/img/productos/audifono-2.jpeg" alt="Audífonos Premium"
+                                    class="card-img-top" />
+                            </a>
+                            <div class="card-body">
+                                <h3 class="card-title">Audífonos Premium</h3>
+                                <p class="card-text">Audífonos de alta calidad con sonido cristalino y tecnología de
+                                    cancelación de ruido.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card modern-card h-100 text-center">
+                            <a href="./pages/tienda.html">
+                                <img src="./assets/img/productos/silla-gamer.jpeg" alt="Sillas Ergonómicas"
+                                    class="card-img-top" />
+                            </a>
+                            <div class="card-body">
+                                <h3 class="card-title">Sillas Ergonómicas</h3>
+                                <p class="card-text">Sillas diseñadas para el máximo confort durante largas jornadas de
+                                    trabajo o gaming.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="commitment-section" id="technology">
+            <div class="container">
+                <h2>Nuestra Propuesta</h2>
+                <h3>Tecnología de Calidad</h3>
+                <p>
+                    En Tecno Chile, nos comprometemos a ofrecer productos tecnológicos
+                    de la más alta calidad con garantía y soporte técnico especializado.
+                </p>
+                <div class="practices-grid">
+                    <article class="practice-box">
+                        <h4>⚡ Última Tecnología</h4>
+                        <p>Productos con las características más avanzadas del mercado tecnológico actual.</p>
+                    </article>
+                    <article class="practice-box">
+                        <h4>🛡️ Garantía Extendida</h4>
+                        <p>Todos nuestros productos incluyen garantía oficial y soporte técnico especializado.</p>
+                    </article>
+                    <article class="practice-box">
+                        <h4>🚚 Envío Rápido</h4>
+                        <p>Entrega rápida y segura en todo Chile con seguimiento en tiempo real.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-container d-flex flex-column justify-content-center align-items-center gap-4 py-4 px-3 px-lg-5">
+            <nav class="footer-nav">
+                <a href="#privacy">Privacy Policy</a>
+                <a href="#terms">Terms of Service</a>
+                <a href="#returns">Shipping & Returns</a>
+            </nav>
+            <div class="social-container d-flex gap-3">
+                <a href="#" aria-label="Instagram">
+                    <img src="./assets/img/instagram.svg" alt="Instagram" />
+                </a>
+                <a href="#" aria-label="Facebook">
+                    <img src="./assets/img/facebook.svg" alt="Facebook" />
+                </a>
+                <a href="#" aria-label="Twitter">
+                    <img src="./assets/img/twitter.svg" alt="Twitter" />
+                </a>
+            </div>
+            <div class="rights-container">
+                <small>©2024 Tecno Chile. Todos los derechos reservados.</small>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./js/user.js"></script>
+</body>
+
+</html>

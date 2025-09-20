@@ -1,0 +1,22 @@
+{
+  "name": "tienda-online",
+  "version": "1.0.0",
+  "description": "Tienda Online para la evaluación final del modulo 4 de Fundamentos en Programación con JavaScript de la Capacitación Desarrolo de aplicaciones front-end de Talento digital.",
+  "homepage": "https://bootcampunab2025.github.io/tienda-online/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bootcampunab2025/tienda-online.git"
+  },
+  "main": "tienda.js",
+  "scripts": {
+  "test": "echo \"Error: no test specified\" && exit 1",
+  "prep:dist": "node -e \"const fs=require('fs'); fs.mkdirSync('dist',{recursive:true}); fs.mkdirSync('dist/pages',{recursive:true});\"",
+  "build:css": "npm run prep:dist && npx clean-css-cli -o dist/style.min.css css/style.css",
+  "build:js": "npm run prep:dist && npx esbuild js/tienda.js js/carrito.js --bundle --minify --outdir=dist",
+  "build:html": "node -e \"const fs=require('fs'); fs.mkdirSync('dist',{recursive:true}); ['index.html','404.html'].forEach(f=>fs.copyFileSync(f,'dist/'+f)); ['pages/tienda.html','pages/carrito.html','pages/contacto.html','pages/sobre-nosotros.html'].forEach(f=>{fs.mkdirSync('dist/'+f.split('/')[0],{recursive:true}); fs.copyFileSync(f,'dist/'+f);}); fs.cpSync('assets','dist/assets',{recursive:true});\"",
+  "build": "npm run build:css && npm run build:js && npm run build:html"
+  },
+  "keywords": [],
+  "author": "MasterdjinnCL, barahona-gallardo, NoemiFagerstromLinck, soyNelsonValenzuela",
+  "license": "ISC"
+}
